@@ -24,6 +24,15 @@
   environment:
     KUBECONFIG: "{{ kubeconfig }}"
 
+- name: Get Argo CD server pod
+  kubernetes.core.k8s_info:
+    api_version: v1
+    kind: Pod
+    namespace: argocd
+    label_selectors:
+      - app.kubernetes.io/name=argocd-server
+  register: argocd_pods
+
 - name: Wait for argocd-server pod to be ready
   kubernetes.core.k8s_info:
     api_version: v1
@@ -32,6 +41,9 @@
     label_selectors:
       - app.kubernetes.io/name=argocd-server
   register: argocd_pods
-  until: argocd_pods.resources | length > 0 and argocd_pods.resources[0].status.phase == "Running"
+  until: >
+    argocd_pods.resources is defined and
+    argocd_pods.resources | length > 0 and
+    argocd_pods.resources[0].status.phase == "Running"
   retries: 10
   delay: 15
