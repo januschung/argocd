@@ -1,0 +1,34 @@
+- name: Install ArgoCD on k3s master node
+  hosts: k3s-master
+  become: yes
+  tasks:
+    - name: Ensure argocd namespace exists
+      kubernetes.core.k8s:
+        api_version: v1
+        kind: Namespace
+        name: argocd
+        state: present
+
+    - name: Apply ArgoCD manifests
+      shell: |
+        kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+      environment:
+        KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+
+    - name: Wait for ArgoCD server deployment ready
+      shell: |
+        kubectl -n argocd rollout status deployment/argocd-server --timeout=120s
+      environment:
+        KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+
+    - name: Wait for argocd-server pod to be ready
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Pod
+        namespace: argocd
+        label_selectors:
+          - app.kubernetes.io/name=argocd-server
+      register: argocd_pods
+      until: argocd_pods.resources | length > 0 and argocd_pods.resources[0].status.phase == "Running"
+      retries: 10
+      delay: 15

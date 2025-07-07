@@ -1,0 +1,5 @@
+- name: Setup ArgoCD
+  hosts: all
+  become: true
+  roles:
+    - argocd
