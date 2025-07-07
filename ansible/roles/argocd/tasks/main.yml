@@ -1,21 +1,26 @@
+- name: Set KUBECONFIG for Ansible to use
+  ansible.builtin.set_fact:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
 - name: Ensure argocd namespace exists
   kubernetes.core.k8s:
     api_version: v1
     kind: Namespace
     name: argocd
     state: present
+    kubeconfig: "{{ kubeconfig }}"
 
 - name: Apply ArgoCD manifests
   shell: |
     kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   environment:
-    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    KUBECONFIG: "{{ kubeconfig }}"
 
 - name: Wait for ArgoCD server deployment ready
   shell: |
     kubectl -n argocd rollout status deployment/argocd-server --timeout=120s
   environment:
-    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    KUBECONFIG: "{{ kubeconfig }}"
 
 - name: Wait for argocd-server pod to be ready
   kubernetes.core.k8s_info:
