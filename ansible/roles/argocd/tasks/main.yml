@@ -33,11 +33,14 @@
         dest: /tmp
         remote_src: yes
 
-    - name: Copy helm to /usr/local/bin
-      copy:
-        src: /tmp/linux-arm64/helm
-        dest: /usr/local/bin/helm
+    - name: Move helm binary to /usr/local/bin
+      command: mv /tmp/linux-arm64/helm /usr/local/bin/helm
+
+    - name: Ensure Helm is executable
+      file:
+        path: /usr/local/bin/helm
         mode: '0755'
+        state: file
 
 - name: Add jetstack (cert-manager) Helm repo
   kubernetes.core.helm_repository:
