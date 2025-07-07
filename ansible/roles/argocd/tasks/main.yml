@@ -12,12 +12,14 @@
 
 - name: Apply ArgoCD manifests
   shell: |
+    export PATH=/usr/local/bin:$PATH
     kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   environment:
     KUBECONFIG: "{{ kubeconfig }}"
 
 - name: Wait for ArgoCD server deployment ready
   shell: |
+    export PATH=/usr/local/bin:$PATH
     kubectl -n argocd rollout status deployment/argocd-server --timeout=120s
   environment:
     KUBECONFIG: "{{ kubeconfig }}"
