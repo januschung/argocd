@@ -50,3 +50,10 @@
     argocd_pods.resources[0].status.phase == "Running"
   retries: 10
   delay: 15
+
+- name: Apply Argo CD root bootstrap Application
+  kubernetes.core.k8s:
+    state: present
+    namespace: argocd
+    src: ../../bootstrap/root-application.yaml
+    kubeconfig: "{{ kubeconfig }}"
