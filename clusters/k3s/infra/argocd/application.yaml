@@ -6,9 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 8.1.2
-    chart: argo-cd
+    repoURL: https://github.com/januschung/argocd
+    targetRevision: HEAD
+    path: clusters/k3s/infra/argocd
+    hellm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
