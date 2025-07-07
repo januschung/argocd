@@ -1,0 +1,17 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - argocd.janusc.duckdns.org
+    paths:
+      - /
+    tls:
+      - hosts:
+          - argocd.janusc.duckdns.org
+configs:
+  params:
+    server.insecure: false
