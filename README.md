@@ -25,9 +25,9 @@ This repository bootstraps a GitOps-based deployment for a K3s cluster using [Ar
 └── clusters
     └── k3s                          # Folder for the 'k3s' cluster
         └── infra
-            ├── ingress-nginx
+            ├── argocd
             │   ├── application.yaml
-            │   └── values.yaml      # NGINX Ingress Controller via Helm
+            │   └── values.yaml      # Self managed ArgoCD
             └── sealed-secrets
                 ├── application.yaml
                 └── values.yaml      # Sealed Secrets controller via Helm
@@ -74,7 +74,6 @@ This repository bootstraps a GitOps-based deployment for a K3s cluster using [Ar
 
 - [Argo CD Official Docs](https://argo-cd.readthedocs.io/)
 - [Bitnami Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets)
-- [Ingress NGINX Controller](https://kubernetes.github.io/ingress-nginx/)
 
 ---
 
