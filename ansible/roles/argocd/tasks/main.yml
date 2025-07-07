@@ -31,8 +31,9 @@
     namespace: argocd
     label_selectors:
       - app.kubernetes.io/name=argocd-server
+    kubeconfig: "{{ kubeconfig }}"
   register: argocd_pods
-  kubeconfig: "{{ kubeconfig }}"
+  
 
 - name: Wait for argocd-server pod to be ready
   kubernetes.core.k8s_info:
@@ -41,8 +42,8 @@
     namespace: argocd
     label_selectors:
       - app.kubernetes.io/name=argocd-server
+    kubeconfig: "{{ kubeconfig }}"
   register: argocd_pods
-  kubeconfig: "{{ kubeconfig }}"
   until: >
     argocd_pods.resources is defined and
     argocd_pods.resources | length > 0 and
