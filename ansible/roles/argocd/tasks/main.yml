@@ -101,9 +101,3 @@
     namespace: argocd
     src: /tmp/root-application.yaml               # remote path
     kubeconfig: "{{ kubeconfig }}"
-
-- name: Install Helm
-  ansible.builtin.shell: |
-    curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-  args:
-    creates: /usr/local/bin/helm
