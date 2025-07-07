@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/januschung/argocd
     targetRevision: HEAD
     path: clusters/k3s/infra
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
