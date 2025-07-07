@@ -55,5 +55,5 @@
   kubernetes.core.k8s:
     state: present
     namespace: argocd
-    src: "{{ playbook_dir }}/../../bootstrap/root-application.yaml"
+    src: "{{ playbook_dir }}/../bootstrap/root-application.yaml"
     kubeconfig: "{{ kubeconfig }}"
