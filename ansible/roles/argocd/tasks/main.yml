@@ -13,11 +13,31 @@
   ansible.builtin.set_fact:
     kubeconfig: /etc/rancher/k3s/k3s.yaml
 
-- name: Install Helm
-  ansible.builtin.shell: |
-    curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-  args:
-    creates: /usr/local/bin/helm
+- name: Check if helm is already installed
+  command: helm version --short
+  register: helm_check
+  failed_when: false
+  changed_when: false
+
+- name: Install helm binary manually if missing
+  when: helm_check.rc != 0
+  block:
+    - name: Download Helm binary (ARM64)
+      get_url:
+        url: https://get.helm.sh/helm-v3.18.3-linux-arm64.tar.gz
+        dest: /tmp/helm.tar.gz
+
+    - name: Extract helm binary
+      unarchive:
+        src: /tmp/helm.tar.gz
+        dest: /tmp
+        remote_src: yes
+
+    - name: Copy helm to /usr/local/bin
+      copy:
+        src: /tmp/linux-arm64/helm
+        dest: /usr/local/bin/helm
+        mode: '0755'
 
 - name: Add jetstack (cert-manager) Helm repo
   kubernetes.core.helm_repository:
