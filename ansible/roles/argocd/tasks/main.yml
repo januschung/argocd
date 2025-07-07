@@ -33,12 +33,12 @@
         dest: /tmp
         remote_src: yes
 
-    - name: Move helm binary to /usr/local/bin
-      command: mv /tmp/linux-arm64/helm /usr/local/bin/helm
+    - name: Move helm binary to /usr/bin
+      command: mv /tmp/linux-arm64/helm /usr/bin/helm
 
     - name: Ensure Helm is executable
       file:
-        path: /usr/local/bin/helm
+        path: /usr/bin/helm
         mode: '0755'
         state: file
 
