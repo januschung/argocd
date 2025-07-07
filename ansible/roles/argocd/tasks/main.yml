@@ -51,9 +51,15 @@
   retries: 10
   delay: 15
 
+- name: Copy Argo CD root bootstrap manifest to remote
+  copy:
+    src: ../../bootstrap/root-application.yaml   # local path, from control machine
+    dest: /tmp/root-application.yaml              # remote path
+    mode: '0644'
+
 - name: Apply Argo CD root bootstrap Application
   kubernetes.core.k8s:
     state: present
     namespace: argocd
-    src: "./bootstrap/root-application.yaml"
+    src: /tmp/root-application.yaml               # remote path
     kubeconfig: "{{ kubeconfig }}"
