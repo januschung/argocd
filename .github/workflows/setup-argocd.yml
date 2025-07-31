@@ -26,4 +26,3 @@ jobs:
           user: ${{ inputs.user }}
           ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
           playbook: setup-argocd.yml
-          extra_vars: acme_email=${{ secrets.DUCKDNS_EMAIL }} duckdns_token=${{ secrets.DUCKDNS_TOKEN }}
