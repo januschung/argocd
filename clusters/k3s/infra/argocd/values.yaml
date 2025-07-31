@@ -1,9 +1,5 @@
 nameOverride: argocd
-global:
-  domain: janusc.duckdns.org
-
-crds:
-  install: true
+fullnameOverride: argocd
 
 configs:
   params:
@@ -13,15 +9,28 @@ configs:
 server:
   ingress:
     enabled: true
-    controller: generic
     ingressClassName: traefik
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
       traefik.ingress.kubernetes.io/router.tls.certresolver: le
-    hostname: janusc.duckdns.org
-    path: /argocd
-    pathType: Prefix
-    extraTls:
+    hosts:
+      - host: janusc.duckdns.org
+        paths:
+          - path: /argocd
+            pathType: Prefix
+    tls:
       - hosts:
           - janusc.duckdns.org
-    servicePort: 80
+
+repoServer:
+  ingress:
+    enabled: false
+applicationController:
+  ingress:
+    enabled: false
+dex:
+  ingress:
+    enabled: false
+notifications:
+  ingress:
+    enabled: false
