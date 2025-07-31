@@ -43,25 +43,8 @@
     release_namespace: argocd
     create_namespace: true
     kubeconfig: "{{ kubeconfig }}"
-    values:
-      server:
-        extraArgs:
-          - --rootpath=/argocd
-        ingress:
-          enabled: true
-          ingressClassName: traefik
-          hosts:
-            - janusc.duckdns.org
-          paths:
-            - /argocd
-          annotations:
-            traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-            traefik.ingress.kubernetes.io/router.tls.certresolver: le
-      configs:
-        cm:
-          url: https://janusc.duckdns.org/argocd
-        params:
-          server.insecure: false
+    values_files:
+      - ../../clusters/k3s/infra/argocd/values.yaml
     wait: true
     wait_timeout: 600s
     update_repo_cache: true
