@@ -1,14 +1,18 @@
 server:
+  extraArgs:
+    - --rootpath=/argocd
   ingress:
     enabled: true
     ingressClassName: traefik
     hosts:
-      - argocd.janusc.duckdns.org
+      - janusc.duckdns.org
     paths:
-      - /
-    tls:
-      - hosts:
-          - argocd.janusc.duckdns.org
+      - /argocd
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+      traefik.ingress.kubernetes.io/router.tls.certresolver: le
 configs:
+  cm:
+    url: https://janusc.duckdns.org/argocd
   params:
     server.insecure: false

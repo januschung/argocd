@@ -3,6 +3,3 @@
   become: true
   roles:
     - argocd
-  vars:
-    duckdns_token: "{{ duckdns_token }}"
-    acme_email: "{{ acme_email }}"
