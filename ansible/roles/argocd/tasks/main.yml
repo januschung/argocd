@@ -36,6 +36,12 @@
     name: argo
     repo_url: https://argoproj.github.io/argo-helm
 
+- name: Copy Argo CD Helm values override to the VM
+  ansible.builtin.copy:
+    src: ../../clusters/k3s/infra/argocd/values.yaml
+    dest: /tmp/argocd-values.yaml
+    mode: '0644'
+
 - name: Install/Upgrade ArgoCD via Helm
   kubernetes.core.helm:
     name: argocd
@@ -44,7 +50,7 @@
     create_namespace: true
     kubeconfig: "{{ kubeconfig }}"
     values_files:
-      - ../../clusters/k3s/infra/argocd/values.yaml
+      - /tmp/argocd-values.yaml
     wait: true
     wait_timeout: 600s
     update_repo_cache: true
