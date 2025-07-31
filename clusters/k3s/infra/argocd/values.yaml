@@ -25,4 +25,4 @@ server:
     extraTls:
       - hosts:
           - janusc.duckdns.org
-    serverPort: 80
+    servicePort: 80
