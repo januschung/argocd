@@ -8,6 +8,16 @@ argo-cd:
       server.rootpath: /argocd
       server.basehref: /argocd/
 
+    cm:
+      kustomize.buildOptions: --enable-helm
+      resource.customizations: |
+        networking.k8s.io/Ingress:
+          health.lua: |
+            return {
+              status = "Healthy",
+              message = "HACK: skip health check for Ingress (override in argo-cd.config.cm chart val)",
+            }
+
   server:
     extraArgs:
       - --insecure
