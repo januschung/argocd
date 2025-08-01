@@ -37,8 +37,8 @@
     repo_url: https://argoproj.github.io/argo-helm
 
 - name: Copy Argo CD Helm values override to the VM
-  ansible.builtin.copy:
-    src: ../../clusters/k3s/infra/argocd/values.yaml
+  ansible.builtin.template:
+    src: argocd-values.yml.j2
     dest: /tmp/argocd-values.yaml
     mode: '0644'
 

@@ -1,0 +1,24 @@
+nameOverride: argocd
+fullnameOverride: argocd
+
+configs:
+  params:
+    server.insecure: true
+    server.rootpath: /argocd
+    server.basehref: /argocd/
+
+server:
+  ingress:
+    extraArgs:
+      - --insecure
+      - --rootpath=/argocd
+      - --basehref=/argocd/
+    enabled: true
+    ingressClassName: traefik
+    hostname: janusc.duckdns.org
+    path: /argocd
+    pathType: Prefix
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+      traefik.ingress.kubernetes.io/router.tls.certresolver: le
+    tls: true
