@@ -18,17 +18,4 @@ server:
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
       traefik.ingress.kubernetes.io/router.tls.certresolver: le
-    tls: false
-
-repoServer:
-  ingress:
-    enabled: false
-applicationController:
-  ingress:
-    enabled: false
-dex:
-  ingress:
-    enabled: false
-notifications:
-  ingress:
-    enabled: false
+    tls: true
