@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: dex-github-secret
+  namespace: argocd
+spec:
+  encryptedData:
+    clientSecret: AgAPxBDNJrr7RJFPSYkLK657SbD8+/o+fGUQecwSsJF3lo5rW7Mv9ludx+165ijqjw8I0MgAf8oB3SRoTtO/47L7b+j+wq4ebdE8VAa3j0e8OkKrvImnqQG3DsPQAZyWlgKQU0Dh8L3BDVoJvc5RJVwudmHrushZZbLOsGi5a18thqji1mo4WuBPYUBqn7gmaRFVb8JIgC0atf2m1vBBGrePDzRpkgkwCbuJDi7Btub/AwDPYAAPPaggD/CGeX4xN4Y37qbDdj5hFNTbcw17I7EFu1rJ3gTvLp0b+BrHXsIjL7IIaEvLDrXMg7DmyDVKGz6JI1oXeH5RAWQ0nOUu0sMn/g1IK3mepnmQh6VrLEe/k+9DMQJ+RzaSA3CyrVNXd7RQSyjExf5uz6Buj2IC0/nqDv/KDVJm1cgTCTPDOauHkrNLZ01vUD7fuSrXjQopOV+On3Sp+5FK+qrpMATPfMWbgMnbh00vzxuA48s8R7q/hSeP339SKmeX46E0dZDrjxGKh8uG1hJLeit3CiDHjnzWnDafNAO3q0r87gSm+NbFWDYz9QlxQ5eitbqCcj4UAvnef3iraG01I4VnMS2+dzLXzs6uTWGZ+gBa0j+QWfda0hpZ1oHqqmH94WfXuUbclEt5+u2GavV2T0nnwrrr1V+bknDlPSE9Q5S/WaggiQzvFEom33hZrC/1JU4azqDzELN4Y60gjRPPX8LZl/hSNhH1VECslI6YmEPm+p4CqaE6OdIBqKTzEqiUB52I
+  template:
+    metadata:
+      creationTimestamp: null
+      name: dex-github-secret
+      namespace: argocd
+    type: Opaque
