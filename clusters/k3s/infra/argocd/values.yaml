@@ -17,19 +17,13 @@ argo-cd:
           name: GitHub
           config:
             clientID: Ov23liIrQ2JLk0Bwvl5O
-            clientSecret: dex-github-secret
+            clientSecretRef:
+              name: dex-github-secret
+              key: clientSecret
             redirectURI: https://janusc.duckdns.org/argocd/api/dex/callback
         staticClients: []
         enablePasswordDB: false
-      oidc.config: |
-        name: GitHub
-        issuer: https://janusc.duckdns.org/argocd/api/dex
-        clientID: argo-cd
-        clientSecret: dex-github-secret
-        requestedScopes: ["openid", "email", "profile"]
-        emailClaim: email
-        usernameClaim: login
-
+      
       kustomize.buildOptions: --enable-helm
       resource.customizations: |
         networking.k8s.io/Ingress:
