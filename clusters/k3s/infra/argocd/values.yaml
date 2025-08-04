@@ -17,7 +17,7 @@ argo-cd:
           name: GitHub
           config:
             clientID: Ov23liIrQ2JLk0Bwvl5O
-            clientSecret: $dex.github.clientSecret
+            clientSecret: $dex:dex.github.clientSecret
             redirectURI: https://janusc.duckdns.org/argocd/api/dex/callback
         staticClients: []
         enablePasswordDB: false
