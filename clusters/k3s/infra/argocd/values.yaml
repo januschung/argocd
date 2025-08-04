@@ -9,6 +9,7 @@ argo-cd:
       server.basehref: /argocd/
 
     cm:
+      url: https://janusc.duckdns.org/argocd
       dex.config: |
         connectors:
           - type: github
