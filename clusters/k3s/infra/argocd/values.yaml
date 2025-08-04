@@ -29,9 +29,11 @@ argo-cd:
               message = "HACK: skip health check for Ingress (override in argo-cd.config.cm chart val)",
             }
     rbac:
-      policy.default: role:readonly
       policy.csv: |
-        g, januschung, role:admin
+        g, github:januschung, role:admin
+      policy.default: role:readonly
+      policy.matchMode: glob
+      scopes: '[groups, email]'
 
   server:
     extraArgs:
