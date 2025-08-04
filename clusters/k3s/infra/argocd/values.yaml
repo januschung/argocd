@@ -25,7 +25,9 @@ argo-cd:
         name: GitHub
         issuer: https://janusc.duckdns.org/argocd/api/dex
         clientID: argo-cd
-        clientSecret: $dex-github-secret
+        clientSecretRef:
+          name: dex-github-secret
+          key: clientSecret
         requestedScopes: ["openid", "email", "profile"]
         emailClaim: email
         usernameClaim: login
