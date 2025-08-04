@@ -9,16 +9,15 @@ argo-cd:
       server.basehref: /argocd/
 
     cm:
-      data:
-        dex.config: |
-          connectors:
-            - type: github
-              id: github
-              name: GitHub
-              config:
-                clientID: Ov23liIrQ2JLk0Bwvl5O
-                clientSecret: $dex-github-secret
-                redirectURI: https://janusc.duckdns.org/argocd/api/dex/callback
+      dex.config: |
+        connectors:
+          - type: github
+            id: github
+            name: GitHub
+            config:
+              clientID: Ov23liIrQ2JLk0Bwvl5O
+              clientSecret: $dex-github-secret
+              redirectURI: https://janusc.duckdns.org/argocd/api/dex/callback
 
       kustomize.buildOptions: --enable-helm
       resource.customizations: |
