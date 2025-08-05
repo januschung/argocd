@@ -9,12 +9,11 @@ spec:
     - path: bootstrap
       repoURL: https://github.com/januschung/argocd
       targetRevision: HEAD
-    - path: infra/argocd
+    - path: infra
       repoURL: https://github.com/januschung/argocd
       targetRevision: HEAD
-    - path: infra/sealed-secrets
-      repoURL: https://github.com/januschung/argocd
-      targetRevision: HEAD
+      directory:
+        recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
