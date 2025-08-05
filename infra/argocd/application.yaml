@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/januschung/argocd
     targetRevision: HEAD
-    path: clusters/k3s/infra/argocd
+    path: infra/argocd
     helm:
       valueFiles:
         - values.yaml
