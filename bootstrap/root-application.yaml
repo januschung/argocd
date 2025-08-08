@@ -15,6 +15,12 @@ spec:
       directory:
         recurse: true
         include: "{*application.yaml,*application-set.yaml}"
+    - path: lab
+      repoURL: https://github.com/januschung/argocd
+      targetRevision: HEAD
+      directory:
+        recurse: true
+        include: "{*application.yaml,*application-set.yaml}"
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
