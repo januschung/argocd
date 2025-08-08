@@ -7,15 +7,17 @@ spec:
   project: default
   source:
     repoURL: https://github.com/januschung/argocd
-    targetRevision: HEAD
+    targetRevision: main
     path: lab/photo-show/chart
     helm:
       valueFiles:
         - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: photo-show
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
