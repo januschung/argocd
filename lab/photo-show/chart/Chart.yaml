@@ -1,0 +1,4 @@
+apiVersion: v2
+name: photo-show
+version: 0.0.1
+type: application
