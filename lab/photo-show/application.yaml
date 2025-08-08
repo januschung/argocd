@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: photo-show
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/januschung/argocd
     targetRevision: HEAD
-    path: infra/argocd
+    path: lab/photo-show/chart
     helm:
       valueFiles:
         - values.yaml
