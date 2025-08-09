@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: ghcr.io/januschung/photo-show
-  tag: 0.0.7
+  tag: 0.0.8
 imagePullSecrets:
   - name: ghcr-token
 resources:
@@ -27,3 +27,4 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
+    traefik.ingress.kubernetes.io/router.middlewares: photo-show-photo-show-stripprefix@kubernetescrd
