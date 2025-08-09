@@ -27,3 +27,4 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
+    traefik.ingress.kubernetes.io/router.middlewares: photo-show-photo-show-stripprefix@kubernetescrd
