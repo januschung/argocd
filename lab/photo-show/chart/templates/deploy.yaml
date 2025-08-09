@@ -7,6 +7,7 @@ metadata:
     app: {{ include "app.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: {{ include "app.name" . }}
@@ -23,7 +24,6 @@ spec:
         {{- range .Values.imagePullSecrets }}
         - name: {{ .name }}
         {{- end }}
-      revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
       containers:
         - name: {{ include "app.name" . }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
