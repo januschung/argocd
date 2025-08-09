@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: ghcr.io/januschung/photo-show
-  tag: 0.0.9
+  tag: 0.0.10
 imagePullSecrets:
   - name: ghcr-token
 resources:
@@ -11,6 +11,9 @@ resources:
   limits:
     memory: '400Mi'
     cpu: '500m'
+revisionHistoryLimit: 5
+configMap:
+  name: photo-show
 service:
   type: ClusterIP
   ports:
