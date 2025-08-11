@@ -35,7 +35,7 @@ argo-cd:
             }
     rbac:
       policy.csv: |
-        g, januschung, role:admin
+        g, januschung@gmail.com, role:admin
       policy.default: role:readonly
       scopes: '[openid, profile, email]'
 
