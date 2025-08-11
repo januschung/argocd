@@ -22,6 +22,7 @@ argo-cd:
             scopes:
             - read:org
             - user:email
+            useLoginAsID: true
         staticClients: []
         enablePasswordDB: false
       
