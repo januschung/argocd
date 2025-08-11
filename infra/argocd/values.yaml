@@ -34,7 +34,7 @@ argo-cd:
       policy.csv: |
         g, januschung, role:admin
       policy.default: role:readonly
-      scopes: '[login]'
+      scopes: '[openid, profile, email]'
 
   server:
     extraArgs:
