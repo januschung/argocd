@@ -19,6 +19,9 @@ argo-cd:
             clientID: Ov23liIrQ2JLk0Bwvl5O
             clientSecret: $dex-github-secret:dex.github.clientSecret
             redirectURI: https://janusc.duckdns.org/argocd/api/dex/callback
+            scopes:
+            - read:org
+            - user:email
         staticClients: []
         enablePasswordDB: false
       
