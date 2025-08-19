@@ -8,7 +8,6 @@ metadata:
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
-  serviceAccountName: {{ include "app.name" . }}
   selector:
     matchLabels:
       app: {{ include "app.name" . }}
@@ -17,6 +16,7 @@ spec:
       labels:
         app: {{ include "app.name" . }}
     spec:
+      serviceAccountName: {{ include "app.name" . }}
       {{- if .Values.persistence }}
       securityContext:
         fsGroup: 65532
