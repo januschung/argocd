@@ -8,6 +8,7 @@ metadata:
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  serviceAccountName: {{ include "app.name" . }}
   selector:
     matchLabels:
       app: {{ include "app.name" . }}
