@@ -6,11 +6,11 @@ imagePullSecrets:
   - name: ghcr-token
 resources:
   requests:
-    memory: '200Mi'
-    cpu: '200m'
+    memory: '32Mi'
+    cpu: '25m'
   limits:
-    memory: '400Mi'
-    cpu: '500m'
+    memory: '64Mi'
+    cpu: '100m'
 revisionHistoryLimit: 5
 service:
   type: ClusterIP
