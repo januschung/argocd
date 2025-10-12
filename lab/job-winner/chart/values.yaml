@@ -22,11 +22,11 @@ frontend:
 
   resources:
     requests:
-      memory: '64Mi'
-      cpu: '25m'
+      memory: '256Mi'
+      cpu: '200m'
     limits:
       memory: '512Mi'
-      cpu: '200m'
+      cpu: '500m'
 
 
 backend:
@@ -47,11 +47,11 @@ backend:
 
   resources:
     requests:
-      memory: '64Mi'
-      cpu: '25m'
+      memory: '256Mi'
+      cpu: '200m'
     limits:
       memory: '512Mi'
-      cpu: '200m'
+      cpu: '500m'
 
 ingress:
   enabled: true
@@ -68,3 +68,4 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
+    traefik.ingress.kubernetes.io/router.middlewares: job-winner-job-winner-stripprefix@kubernetescrd

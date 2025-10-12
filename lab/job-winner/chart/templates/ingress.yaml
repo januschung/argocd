@@ -30,4 +30,3 @@ spec:
                 name: {{ .Values.name }}-frontend
                 port:
                   number: {{ .Values.ingress.servicePort }}
-
