@@ -1,0 +1,4 @@
+apiVersion: v2
+name: job-winner
+version: 0.0.1
+type: application
