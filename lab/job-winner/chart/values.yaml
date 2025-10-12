@@ -16,7 +16,7 @@ frontend:
         port: 80
         targetPort: 80
   secret: {}
-  configMap: {}
+  configMap: job-winner-frontend
   persistence: {}
 
   resources:
@@ -40,7 +40,7 @@ backend:
         port: 8080
         targetPort: 8080
   secret: {}
-  configMap: {}
+  configMap: job-winner-backend
   persistence: {}
 
   resources:
