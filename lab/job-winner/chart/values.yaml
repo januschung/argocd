@@ -57,10 +57,10 @@ ingress:
   enabled: true
   ingressClassName: traefik
   hostname: janusc.duckdns.org
-  path: /jobwinner
+  path: /
   pathType: Prefix
   servicePort: 80
-  backendPath: /jobwinner/graphql
+  backendPath: /graphql
   backendPathType: Prefix
   backendServicePort: 8080
   backendServiceName: job-winner-backend
