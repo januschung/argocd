@@ -22,7 +22,7 @@ ingress:
   enabled: true
   ingressClassName: traefik
   hostname: janusc.duckdns.org
-  path: /
+  path: /ob
   pathType: Prefix
   servicePort: 80
   annotations:
