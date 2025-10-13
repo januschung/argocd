@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
-  repository: ghcr.io/januschung/job-winner-ui
-  tag: 9ebcc04
+  repository: ghcr.io/januschung/observation-bay
+  tag: 0.0.5
 imagePullSecrets:
   - name: ghcr-token
 resources:
@@ -17,7 +17,7 @@ service:
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 8000
 ingress:
   enabled: true
   ingressClassName: traefik
