@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: ghcr.io/januschung/jobwinner-ui
+  repository: ghcr.io/januschung/job-winner-ui
   tag: 9ebcc04
 imagePullSecrets:
   - name: ghcr-token
