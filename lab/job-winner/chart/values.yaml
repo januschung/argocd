@@ -55,7 +55,7 @@ ingress:
   path: /jobwinner
   pathType: Prefix
   servicePort: 80
-  backendPath: /graphql
+  backendPath: /jobwinner/graphql
   backendPathType: Prefix
   backendServicePort: 8080
   backendServiceName: job-winner-backend
