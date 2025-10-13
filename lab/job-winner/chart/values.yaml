@@ -14,7 +14,7 @@ frontend:
     ports:
       - name: http
         port: 80
-        targetPort: 8080
+        targetPort: 8000
   secret: {}
   configMap: 
     name: job-winner-frontend
@@ -57,7 +57,7 @@ ingress:
   enabled: true
   ingressClassName: traefik
   hostname: janusc.duckdns.org
-  path: /
+  path: /jobwinner
   pathType: Prefix
   servicePort: 80
   backendPath: /jobwinner/graphql
