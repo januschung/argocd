@@ -6,15 +6,15 @@ imagePullSecrets:
 
 frontend:
   image:
-    repository: ghcr.io/januschung/observation-bay
-    tag: 0.0.5
+    repository: ghcr.io/januschung/job-winner-ui
+    tag: 9ebcc04
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
     ports:
       - name: http
         port: 80
-        targetPort: 8000
+        targetPort: 80
   secret: {}
   configMap: 
     name: job-winner-frontend
