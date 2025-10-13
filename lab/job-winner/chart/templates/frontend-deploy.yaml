@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}-frontend
+  name: {{ include "app.name" . }}-frontend
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Values.name }}-frontend
+    app: {{ include "app.name" . }}-frontend
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.frontend.revisionHistoryLimit }}
   selector:
     matchLabels:
-      app: {{ .Values.name }}-frontend
+      app: {{ include "app.name" . }}-frontend
   template:
     metadata:
       labels:
-        app: {{ .Values.name }}-frontend
+        app: {{ include "app.name" . }}-frontend
     spec:
       {{- if .Values.frontend.persistence }}
       securityContext:
@@ -25,7 +25,7 @@ spec:
         - name: {{ .name }}
         {{- end }}
       containers:
-        - name: {{ .Values.name }}-frontend
+        - name: {{ include "app.name" . }}-frontend
           image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
           ports:
           {{- range .Values.frontend.service.ports }}
