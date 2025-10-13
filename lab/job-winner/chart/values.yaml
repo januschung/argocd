@@ -68,4 +68,4 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
-    traefik.ingress.kubernetes.io/router.middlewares: job-winner-job-winner-stripprefix@kubernetescrd
+    # traefik.ingress.kubernetes.io/router.middlewares: job-winner-job-winner-stripprefix@kubernetescrd
