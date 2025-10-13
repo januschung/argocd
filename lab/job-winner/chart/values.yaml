@@ -7,7 +7,7 @@ imagePullSecrets:
 frontend:
   image:
     repository: ghcr.io/januschung/job-winner-ui
-    tag: 7a72336
+    tag: d3c384b
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
