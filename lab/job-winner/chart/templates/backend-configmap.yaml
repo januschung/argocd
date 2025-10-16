@@ -4,6 +4,6 @@ metadata:
   name: {{ include "app.name" . }}-backend
 data:
   SPRING_PROFILES_ACTIVE: demo
-  UI_PATH: https://{{ .Values.ingress.hostname }}/jobwinner
+  UI_PATH: https://{{ .Values.ingress.hostname }}/
   SERVER_PORT: "8080"
   
