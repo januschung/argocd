@@ -51,11 +51,11 @@ backend:
 ingress:
   enabled: true
   ingressClassName: traefik
-  hostname: janusc.duckdns.org
-  path: /jobwinner
+  hostname: jobwinner.duckdns.org
+  path: /
   pathType: Prefix
   servicePort: 80
-  backendPath: /jobwinner/graphql
+  backendPath: /graphql
   backendPathType: Prefix
   backendServicePort: 8080
   backendServiceName: job-winner-backend
@@ -63,4 +63,3 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
-    traefik.ingress.kubernetes.io/router.middlewares: job-winner-job-winner-stripprefix@kubernetescrd
