@@ -21,7 +21,7 @@ spec:
         fsGroup: 65532
       {{- end }}
       imagePullSecrets:
-        {{- range .Values.imagePullSecrets }}
+        {{- range .Values.backend.imagePullSecrets }}
         - name: {{ .name }}
         {{- end }}
       containers:
