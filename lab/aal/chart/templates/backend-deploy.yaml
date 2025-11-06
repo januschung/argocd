@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.name" . }}-backend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "app.name" . }}-backend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.backend.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: {{ include "app.name" . }}-backend
+  template:
+    metadata:
+      labels:
+        app: {{ include "app.name" . }}-backend
+    spec:
+      {{- if .Values.backend.persistence }}
+      securityContext:
+        fsGroup: 65532
+      {{- end }}
+      imagePullSecrets:
+        {{- range .Values.imagePullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
+      containers:
+        - name: {{ include "app.name" . }}-backend
+          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          ports:
+          {{- range .Values.backend.service.ports }}
+            - containerPort: {{ .targetPort }}
+          {{- end }}
+          {{- if or .Values.backend.secret .Values.backend.configMap }}
+          envFrom:
+            {{- if or .Values.backend.secret }}
+            - secretRef:
+                name: {{ .Values.backend.secret.name }}
+            {{- end }}
+            {{- if or .Values.backend.configMap }}
+            - configMapRef:
+                name: {{ .Values.backend.configMap.name }}
+            {{- end }}
+          {{- end }}
+          resources:
+            requests:
+              memory: {{ .Values.backend.resources.requests.memory | quote }}
+              cpu: {{ .Values.backend.resources.requests.cpu | quote }}
+            limits:
+              memory: {{ .Values.backend.resources.limits.memory | quote }}
+              cpu: {{ .Values.backend.resources.limits.cpu | quote }}
+          volumeMounts:
+            {{- if .Values.backend.persistence }}
+            - name: data
+              mountPath: {{ .Values.backend.persistence.mountPath }}
+            {{- end }}
+
+      volumes:
+        {{- if .Values.backend.persistence }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.backend.persistence.existingClaim }}
+        {{- end }}
