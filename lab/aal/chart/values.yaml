@@ -3,6 +3,8 @@ frontend:
   image:
     repository: ghcr.io/januschung/aal-frontend
     tag: 1c494c4
+  imagePullSecrets:
+    - name: ghcr-token
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
@@ -27,6 +29,8 @@ backend:
   image:
     repository: ghcr.io/januschung/aal-backend
     tag: 1c494c4
+  imagePullSecrets:
+    - name: ghcr-token
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
