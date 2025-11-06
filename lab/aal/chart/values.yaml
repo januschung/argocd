@@ -1,0 +1,64 @@
+replicaCount: 1
+frontend:
+  image:
+    repository: ghcr.io/januschung/aal-frontend
+    tag: 1c494c4
+  revisionHistoryLimit: 5
+  service:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 80
+        targetPort: 80
+  secret: {}
+  configMap: {}
+  persistence: {}
+
+  resources:
+    requests:
+      memory: '256Mi'
+      cpu: '200m'
+    limits:
+      memory: '512Mi'
+      cpu: '500m'
+
+
+backend:
+  image:
+    repository: ghcr.io/januschung/aal-backend
+    tag: 1c494c4
+  revisionHistoryLimit: 5
+  service:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 80
+        targetPort: 80
+  secret:
+    name: aal-backend-secret
+  configMap: {}
+  persistence: {}
+
+  resources:
+    requests:
+      memory: '256Mi'
+      cpu: '200m'
+    limits:
+      memory: '512Mi'
+      cpu: '500m'
+
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  hostname: ableaccesshk.com
+  path: /
+  pathType: Prefix
+  servicePort: 80
+  backendPath: /api
+  backendPathType: Prefix
+  backendServicePort: 80
+  backendServiceName: aal-backend
+
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls.certresolver: le

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.name" . }}-frontend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "app.name" . }}-frontend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.frontend.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: {{ include "app.name" . }}-frontend
+  template:
+    metadata:
+      labels:
+        app: {{ include "app.name" . }}-frontend
+    spec:
+      {{- if .Values.frontend.persistence }}
+      securityContext:
+        fsGroup: 65532
+      {{- end }}
+      imagePullSecrets:
+        {{- range .Values.imagePullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
+      containers:
+        - name: {{ include "app.name" . }}-frontend
+          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          ports:
+          {{- range .Values.frontend.service.ports }}
+            - containerPort: {{ .targetPort }}
+          {{- end }}
+          {{- if or .Values.frontend.secret .Values.frontend.configMap }}
+          envFrom:
+            {{- if or .Values.frontend.secret }}
+            - secretRef:
+                name: {{ .Values.frontend.secret.name }}
+            {{- end }}
+            {{- if or .Values.frontend.configMap }}
+            - configMapRef:
+                name: {{ .Values.frontend.configMap.name }}
+            {{- end }}
+          {{- end }}
+          resources:
+            requests:
+              memory: {{ .Values.frontend.resources.requests.memory | quote }}
+              cpu: {{ .Values.frontend.resources.requests.cpu | quote }}
+            limits:
+              memory: {{ .Values.frontend.resources.limits.memory | quote }}
+              cpu: {{ .Values.frontend.resources.limits.cpu | quote }}
+          volumeMounts:
+            {{- if .Values.frontend.persistence }}
+            - name: data
+              mountPath: {{ .Values.frontend.persistence.mountPath }}
+            {{- end }}
+
+      volumes:
+        {{- if .Values.frontend.persistence }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.frontend.persistence.existingClaim }}
+        {{- end }}
