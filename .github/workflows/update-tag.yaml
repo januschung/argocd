@@ -26,7 +26,7 @@ jobs:
 
       - name: Update tag
         run: |
-          cd lab/${APP_NAME}/chart/templates
+          cd lab/${APP_NAME}/chart
           if [[ -z "${DEPLOYMENT_TYPE}" ]]; then
             yq -i "${DEPLOYMENT_TYPE}.image.tag = \"${TAG}\"" values.yaml
           else
