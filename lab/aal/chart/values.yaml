@@ -25,7 +25,7 @@ frontend:
 backend:
   image:
     repository: ghcr.io/januschung/aal-backend
-    tag: 1c494c4
+    tag: c38d812
   imagePullSecrets:
     - name: ghcr-token
   revisionHistoryLimit: 5
