@@ -28,7 +28,7 @@ jobs:
         run: |
           cd lab/${APP_NAME}/chart
           if [[ "${DEPLOYMENT_TYPE}" ]]; then
-            yq -i "${DEPLOYMENT_TYPE}.image.tag = \"${TAG}\"" values.yaml
+            yq -i ".${DEPLOYMENT_TYPE}.image.tag = \"${TAG}\"" values.yaml
           else
             yq -i ".image.tag = \"${TAG}\"" values.yaml
           fi
