@@ -13,7 +13,7 @@ jobs:
     env:
       APP_NAME: ${{ github.event.client_payload.app_name }}
       TAG: ${{ github.event.client_payload.tag }}
-      DEOPLOYMENT_TYPE: ${{ github.event.client_payload.deployment_type }}
+      DEPLOYMENT_TYPE: ${{ github.event.client_payload.deployment_type }}
 
     steps:
       - name: Check out repo
@@ -27,7 +27,7 @@ jobs:
       - name: Update tag
         run: |
           cd lab/${APP_NAME}/chart/templates
-          if [[ -Z "${DEPLOYMENT_TYPE}" ]]; then
+          if [[ -z "${DEPLOYMENT_TYPE}" ]]; then
             yq -i "${DEPLOYMENT_TYPE}.image.tag = \"${TAG}\"" values.yaml
           else
             yq -i ".image.tag = \"${TAG}\"" values.yaml
