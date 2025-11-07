@@ -15,7 +15,6 @@ frontend:
   secret: {}
   configMap: {}
   persistence: {}
-
   resources:
     requests:
       memory: '256Mi'
@@ -23,8 +22,6 @@ frontend:
     limits:
       memory: '512Mi'
       cpu: '500m'
-
-
 backend:
   image:
     repository: ghcr.io/januschung/aal-backend
@@ -42,7 +39,6 @@ backend:
     name: aal-backend-secret
   configMap: {}
   persistence: {}
-
   resources:
     requests:
       memory: '256Mi'
@@ -50,7 +46,6 @@ backend:
     limits:
       memory: '512Mi'
       cpu: '500m'
-
 ingress:
   enabled: true
   ingressClassName: traefik
@@ -62,8 +57,9 @@ ingress:
   backendPathType: Prefix
   backendServicePort: 80
   backendServiceName: aal-backend
-
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
     traefik.ingress.kubernetes.io/router.middlewares: aal-strip-api@kubernetescrd
+image:
+  tag: c38d812
