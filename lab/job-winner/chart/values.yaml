@@ -24,7 +24,7 @@ frontend:
 backend:
   image:
     repository: ghcr.io/januschung/job-winner
-    tag: 9bc0f16
+    tag: cd66f1d
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
