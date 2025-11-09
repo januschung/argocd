@@ -2,7 +2,7 @@ replicaCount: 1
 frontend:
   image:
     repository: ghcr.io/januschung/job-winner-ui
-    tag: 9ebcc04
+    tag: b0a0232
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
@@ -11,10 +11,9 @@ frontend:
         port: 80
         targetPort: 80
   secret: {}
-  configMap: 
+  configMap:
     name: job-winner-frontend
   persistence: {}
-
   resources:
     requests:
       memory: '256Mi'
@@ -22,8 +21,6 @@ frontend:
     limits:
       memory: '512Mi'
       cpu: '500m'
-
-
 backend:
   image:
     repository: ghcr.io/januschung/job-winner
@@ -39,7 +36,6 @@ backend:
   configMap:
     name: job-winner-backend
   persistence: {}
-
   resources:
     requests:
       memory: '256Mi'
@@ -47,7 +43,6 @@ backend:
     limits:
       memory: '512Mi'
       cpu: '500m'
-
 ingress:
   enabled: true
   ingressClassName: traefik
@@ -59,7 +54,6 @@ ingress:
   backendPathType: Prefix
   backendServicePort: 8080
   backendServiceName: job-winner-backend
-
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
