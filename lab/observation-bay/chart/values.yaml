@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: ghcr.io/januschung/observation-bay
-  tag: 6a5da00
+  tag: 8911f74
 imagePullSecrets:
   - name: ghcr-token
 resources:
