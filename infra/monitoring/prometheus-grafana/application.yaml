@@ -12,6 +12,7 @@ spec:
       helm:
         valueFiles:
           - $values/infra/monitoring/prometheus-grafana/values.yaml
+        skipCrds: true
     - repoURL: https://github.com/januschung/argocd
       targetRevision: main
       ref: values
