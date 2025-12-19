@@ -9,12 +9,12 @@ spec:
     - repoURL: https://grafana.github.io/helm-charts
       targetRevision: 6.49.0
       chart: loki
+      helm:
+        valueFiles:
+          - $values/infra/monitoring/loki/values.yaml
     - repoURL: https://github.com/januschung/argocd
       targetRevision: main
       ref: values
-  helm:
-    valueFiles:
-      - $values/infra/monitoring/loki/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
