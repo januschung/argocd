@@ -1,0 +1,93 @@
+global:
+  imagePullSecrets:
+    - name: ghcr-token
+
+alloy:
+  configMap:
+    create: true
+    content: |
+      logging {
+        level  = "info"
+        format = "logfmt"
+      }
+
+      prometheus.remote_write "prometheus" {
+        endpoint {
+          url = "http://prometheus-grafana-kube-pr-prometheus:9090/api/v1/write"
+        }
+      }
+
+      loki.write "loki" {
+        endpoint {
+          url = "http://loki:3100/loki/api/v1/push"
+        }
+      }
+
+      prometheus.scrape "kubernetes" {
+        targets = discovery.kubernetes.pods.targets
+        forward_to = [prometheus.remote_write.prometheus.receiver]
+      }
+
+      discovery.kubernetes "pods" {
+        role = "pod"
+      }
+
+      discovery.kubernetes "pods_logs" {
+        role = "pod"
+      }
+
+      loki.source.kubernetes "kubernetes" {
+        targets = discovery.kubernetes.pods_logs.targets
+        forward_to = [loki.relabel.add_labels.receiver]
+      }
+
+      // Add pod_name and service_name labels for easier filtering
+      loki.relabel "add_labels" {
+        forward_to = [loki.write.loki.receiver]
+
+        // Extract pod name from instance label (format: namespace/pod-name:container)
+        // This creates a clean pod_name label for filtering by pod name only
+        rule {
+          source_labels = ["instance"]
+          regex        = "^[^/]+/([^:]+):.*$"
+          target_label = "pod_name"
+          replacement  = "$1"
+        }
+
+        // Extract service name from pod name pattern
+        // For pods like "aal-backend-xxx", extract "aal-backend"
+        // For pods like "photo-show-xxx", extract "photo-show"
+        rule {
+          source_labels = ["pod_name"]
+          regex        = "^([a-z-]+(?:-[a-z]+)?)-[a-z0-9-]+$"
+          target_label = "service_name"
+          replacement  = "$1"
+        }
+
+        // If service_name is empty (regex didn't match), use pod_name as fallback
+        // This handles single-word pod names or pods that don't match the pattern
+        rule {
+          source_labels = ["service_name", "pod_name"]
+          regex        = "^$"
+          target_label = "service_name"
+          replacement  = "$2"
+        }
+
+        // Replace the default component name with extracted service name
+        rule {
+          source_labels = ["service_name"]
+          regex        = "^(loki\\.source\\.kubernetes\\.kubernetes|unknown_service)$"
+          target_label = "service_name"
+          replacement  = ""
+          action       = "replace"
+        }
+      }
+
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 25m
+    limits:
+      memory: 256Mi
+      cpu: 100m
+
