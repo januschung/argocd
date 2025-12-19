@@ -9,12 +9,12 @@ spec:
     - repoURL: https://prometheus-community.github.io/helm-charts
       targetRevision: 80.4.1
       chart: kube-prometheus-stack
+      helm:
+        valueFiles:
+          - $values/infra/monitoring/prometheus-grafana/values.yaml
     - repoURL: https://github.com/januschung/argocd
       targetRevision: main
       ref: values
-  helm:
-    valueFiles:
-      - $values/infra/monitoring/prometheus-grafana/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

@@ -9,12 +9,12 @@ spec:
     - repoURL: https://grafana.github.io/helm-charts
       targetRevision: 1.5.0
       chart: alloy
+      helm:
+        valueFiles:
+          - $values/infra/monitoring/alloy/values.yaml
     - repoURL: https://github.com/januschung/argocd
       targetRevision: main
       ref: values
-  helm:
-    valueFiles:
-      - $values/infra/monitoring/alloy/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
