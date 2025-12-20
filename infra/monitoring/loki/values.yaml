@@ -31,6 +31,13 @@ persistence:
   storageClass: ""
   size: 2Gi
 
+# Disable canary - it's a testing tool that sends "pppppppppppppppppppp" test logs
+# Useful for testing but not needed in production
+test:
+  enabled: false
+lokiCanary:
+  enabled: false
+
 loki:
   # Use test schema for filesystem storage (required for validation)
   useTestSchema: true
@@ -70,10 +77,3 @@ loki:
       chunks: chunks
       ruler: ruler
       admin: admin
-
-  # Disable canary - it's a testing tool that sends "pppppppppppppppppppp" test logs
-  # Useful for testing but not needed in production
-  test:
-    enabled: false
-  lokiCanary:
-    enabled: false
