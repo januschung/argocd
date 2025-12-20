@@ -16,11 +16,6 @@ chunksCache:
 resultsCache:
   enabled: false
 
-# Disable canary - it's a testing tool that sends "pppppppppppppppppppp" test logs
-# Useful for testing but not needed in production
-canary:
-  enabled: false
-
 singleBinary:
   replicas: 1
   resources:
@@ -75,3 +70,10 @@ loki:
       chunks: chunks
       ruler: ruler
       admin: admin
+
+  # Disable canary - it's a testing tool that sends "pppppppppppppppppppp" test logs
+  # Useful for testing but not needed in production
+  test:
+    enabled: false
+  lokiCanary:
+    enabled: false
