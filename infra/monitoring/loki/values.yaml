@@ -4,9 +4,17 @@ global:
 
 deploymentMode: SingleBinary
 
+# Disable distributed components - not needed in SingleBinary mode
 backend: { replicas: 0 }
 read: { replicas: 0 }
 write: { replicas: 0 }
+
+# Disable cache components - they request too many resources (9.6GB memory!)
+# SingleBinary mode doesn't need separate cache pods
+chunksCache:
+  enabled: false
+resultsCache:
+  enabled: false
 
 singleBinary:
   replicas: 1
