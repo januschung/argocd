@@ -16,6 +16,11 @@ chunksCache:
 resultsCache:
   enabled: false
 
+# Disable canary - it's a testing tool that sends "pppppppppppppppppppp" test logs
+# Useful for testing but not needed in production
+canary:
+  enabled: false
+
 singleBinary:
   replicas: 1
   resources:
