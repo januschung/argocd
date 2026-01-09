@@ -2,7 +2,7 @@ replicaCount: 1
 frontend:
   image:
     repository: ghcr.io/januschung/job-winner-ui
-    tag: b6ed134
+    tag: 1e49adc
   revisionHistoryLimit: 5
   service:
     type: ClusterIP
