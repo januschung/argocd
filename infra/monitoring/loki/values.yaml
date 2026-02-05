@@ -77,3 +77,19 @@ loki:
       chunks: chunks
       ruler: ruler
       admin: admin
+
+gateway:
+  enabled: true
+  verboseLogging: false
+  
+  service:
+    annotations:
+      prometheus.io/scrape: "false"
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 50m
+      memory: 64Mi
