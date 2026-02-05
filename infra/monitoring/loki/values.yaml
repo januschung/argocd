@@ -84,11 +84,3 @@ gateway:
   
   annotations:
     prometheus.io/scrape: "false"
-
-  resources:
-    requests:
-      cpu: 10m
-      memory: 32Mi
-    limits:
-      cpu: 50m
-      memory: 64Mi
