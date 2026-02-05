@@ -117,7 +117,7 @@ grafana:
           editable: true
           options:
             path: /var/lib/grafana/dashboards/application-logs
-dashboards:
+  dashboards:
     application-logs:
       # Existing dashboards from Grafana.com
       loki-logs-performance:
