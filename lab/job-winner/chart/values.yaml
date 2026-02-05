@@ -16,11 +16,11 @@ frontend:
   persistence: {}
   resources:
     requests:
-      memory: '256Mi'
-      cpu: '200m'
+      memory: '512Mi'
+      cpu: '100m'
     limits:
       memory: '512Mi'
-      cpu: '500m'
+      cpu: '300m'
 backend:
   image:
     repository: ghcr.io/januschung/job-winner
@@ -38,11 +38,11 @@ backend:
   persistence: {}
   resources:
     requests:
-      memory: '256Mi'
-      cpu: '200m'
+      memory: '64Mi'
+      cpu: '100m'
     limits:
-      memory: '512Mi'
-      cpu: '500m'
+      memory: '64Mi'
+      cpu: '200m'
 ingress:
   enabled: true
   ingressClassName: traefik
