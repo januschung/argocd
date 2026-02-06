@@ -158,153 +158,17 @@ grafana:
             "links": [],
             "panels": [
               {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "prometheus"
-                },
-                "fieldConfig": {
-                  "defaults": {
-                    "color": {
-                      "mode": "palette-classic"
-                    },
-                    "custom": {
-                      "axisBorderShow": false,
-                      "axisCenteredZero": false,
-                      "axisColorMode": "text",
-                      "axisLabel": "",
-                      "axisPlacement": "auto",
-                      "barAlignment": 0,
-                      "barWidthFactor": 0.6,
-                      "drawStyle": "line",
-                      "fillOpacity": 0,
-                      "gradientMode": "none",
-                      "hideFrom": {
-                        "legend": false,
-                        "tooltip": false,
-                        "viz": false
-                      },
-                      "insertNulls": false,
-                      "lineInterpolation": "linear",
-                      "lineStyle": {
-                        "fill": "solid"
-                      },
-                      "lineWidth": 1,
-                      "pointSize": 5,
-                      "scaleDistribution": {
-                        "type": "linear"
-                      },
-                      "showPoints": "auto",
-                      "showValues": false,
-                      "spanNulls": false,
-                      "stacking": {
-                        "group": "A",
-                        "mode": "none"
-                      },
-                      "thresholdsStyle": {
-                        "mode": "off"
-                      }
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green",
-                          "value": 0
-                        },
-                        {
-                          "color": "red",
-                          "value": 80
-                        }
-                      ]
-                    }
-                  },
-                  "overrides": [
-                    {
-                      "matcher": {
-                        "id": "byFrameRefID",
-                        "options": "B"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.lineStyle",
-                          "value": {
-                            "dash": [
-                              10,
-                              10
-                            ],
-                            "fill": "dash"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
+                "collapsed": false,
                 "gridPos": {
-                  "h": 8,
-                  "w": 12,
+                  "h": 1,
+                  "w": 24,
                   "x": 0,
                   "y": 0
                 },
-                "id": 6,
-                "options": {
-                  "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
-                    "placement": "bottom",
-                    "showLegend": true
-                  },
-                  "tooltip": {
-                    "hideZeros": false,
-                    "mode": "multi",
-                    "sort": "none"
-                  }
-                },
-                "pluginVersion": "12.3.0",
-                "targets": [
-                  {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "prometheus"
-                    },
-                    "editorMode": "code",
-                    "exemplar": false,
-                    "expr": "label_replace(\n  sum(\n    rate(container_cpu_usage_seconds_total{pod=~\"job-winner-frontend-.*\", container!=\"\"}[5m])\n  ) by (pod),\n  \"type\", \"Usage\", \"\", \"\"\n)",
-                    "hide": false,
-                    "instant": false,
-                    "legendFormat": "{{type}}",
-                    "range": true,
-                    "refId": "A"
-                  },
-                  {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "prometheus"
-                    },
-                    "editorMode": "code",
-                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_requests{pod=~\"job-winner-frontend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Request\", \"\", \"\"\n)",
-                    "hide": false,
-                    "instant": false,
-                    "legendFormat": "{{type}}",
-                    "range": true,
-                    "refId": "B"
-                  },
-                  {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "prometheus"
-                    },
-                    "editorMode": "code",
-                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_limits{pod=~\"job-winner-frontend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Limit\", \"\", \"\"\n)",
-                    "hide": false,
-                    "instant": false,
-                    "legendFormat": "{{type}}",
-                    "range": true,
-                    "refId": "C"
-                  }
-                ],
-                "title": "Frontend CPU Usage vs. Request vs. Limit",
-                "type": "timeseries"
+                "id": 15,
+                "panels": [],
+                "title": "Resources % usage",
+                "type": "row"
               },
               {
                 "datasource": {
@@ -334,9 +198,6 @@ grafana:
                       },
                       "insertNulls": false,
                       "lineInterpolation": "linear",
-                      "lineStyle": {
-                        "fill": "solid"
-                      },
                       "lineWidth": 1,
                       "pointSize": 5,
                       "scaleDistribution": {
@@ -366,36 +227,18 @@ grafana:
                           "value": 80
                         }
                       ]
-                    }
+                    },
+                    "unit": "percent"
                   },
-                  "overrides": [
-                    {
-                      "matcher": {
-                        "id": "byFrameRefID",
-                        "options": "B"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.lineStyle",
-                          "value": {
-                            "dash": [
-                              10,
-                              10
-                            ],
-                            "fill": "dash"
-                          }
-                        }
-                      ]
-                    }
-                  ]
+                  "overrides": []
                 },
                 "gridPos": {
                   "h": 8,
                   "w": 12,
-                  "x": 12,
-                  "y": 0
+                  "x": 0,
+                  "y": 1
                 },
-                "id": 4,
+                "id": 17,
                 "options": {
                   "legend": {
                     "calcs": [],
@@ -405,7 +248,7 @@ grafana:
                   },
                   "tooltip": {
                     "hideZeros": false,
-                    "mode": "multi",
+                    "mode": "single",
                     "sort": "none"
                   }
                 },
@@ -417,43 +260,129 @@ grafana:
                       "uid": "prometheus"
                     },
                     "editorMode": "code",
-                    "exemplar": false,
-                    "expr": "label_replace(\n  sum(\n    rate(container_cpu_usage_seconds_total{pod=~\"job-winner-backend-.*\", container!=\"\"}[5m])\n  ) by (pod),\n  \"type\", \"Usage\", \"\", \"\"\n)",
-                    "hide": false,
+                    "expr": "100 *\nsum by (pod) (\n  container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", namespace=\"job-winner\", container!=\"\", image!=\"\"}\n)\n/\nsum by (pod) (\n  kube_pod_container_resource_limits{namespace=\"job-winner\", resource=\"memory\"}\n)",
                     "instant": false,
-                    "legendFormat": "{{type}}",
+                    "legendFormat": "__auto",
                     "range": true,
                     "refId": "A"
-                  },
-                  {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "prometheus"
-                    },
-                    "editorMode": "code",
-                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_requests{pod=~\"job-winner-backend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Request\", \"\", \"\"\n)",
-                    "hide": false,
-                    "instant": false,
-                    "legendFormat": "{{type}}",
-                    "range": true,
-                    "refId": "B"
-                  },
-                  {
-                    "datasource": {
-                      "type": "prometheus",
-                      "uid": "prometheus"
-                    },
-                    "editorMode": "code",
-                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_limits{pod=~\"job-winner-backend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Limit\", \"\", \"\"\n)",
-                    "hide": false,
-                    "instant": false,
-                    "legendFormat": "{{type}}",
-                    "range": true,
-                    "refId": "C"
                   }
                 ],
-                "title": "Backend CPU Usage vs. Request vs. Limit",
+                "title": "Memory usage % of limit (per pod)",
                 "type": "timeseries"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "prometheus"
+                },
+                "description": "Shows CPU throttling per pod. CPU throttling happens when a container hits its Kubernetes CPU limit and Linux temporarily pauses it (CFS throttling).",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "barWidthFactor": 0.6,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "showValues": false,
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "percent"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 8,
+                  "w": 12,
+                  "x": 12,
+                  "y": 1
+                },
+                "id": 16,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                  }
+                },
+                "pluginVersion": "12.3.0",
+                "targets": [
+                  {
+                    "datasource": {
+                      "type": "prometheus",
+                      "uid": "prometheus"
+                    },
+                    "editorMode": "code",
+                    "expr": "100 *\nsum by (pod) (\n  rate(container_cpu_cfs_throttled_periods_total{\n    namespace=\"job-winner\",\n    container!=\"\",\n    image!=\"\"\n  }[$__rate_interval])\n)\n/\nsum by (pod) (\n  rate(container_cpu_cfs_periods_total{\n    namespace=\"job-winner\",\n    container!=\"\",\n    image!=\"\"\n  }[$__rate_interval])\n)",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                  }
+                ],
+                "title": "CPU throttling (%) by pod",
+                "type": "timeseries"
+              },
+              {
+                "collapsed": false,
+                "gridPos": {
+                  "h": 1,
+                  "w": 24,
+                  "x": 0,
+                  "y": 9
+                },
+                "id": 13,
+                "panels": [],
+                "title": "Resources",
+                "type": "row"
               },
               {
                 "datasource": {
@@ -543,7 +472,7 @@ grafana:
                   "h": 8,
                   "w": 12,
                   "x": 0,
-                  "y": 8
+                  "y": 10
                 },
                 "id": 10,
                 "options": {
@@ -665,8 +594,7 @@ grafana:
                           "value": 80
                         }
                       ]
-                    },
-                    "unit": "bytes"
+                    }
                   },
                   "overrides": [
                     {
@@ -693,9 +621,9 @@ grafana:
                   "h": 8,
                   "w": 12,
                   "x": 12,
-                  "y": 8
+                  "y": 10
                 },
-                "id": 11,
+                "id": 4,
                 "options": {
                   "legend": {
                     "calcs": [],
@@ -718,7 +646,7 @@ grafana:
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "label_replace(sum(container_memory_working_set_bytes{pod=~\"job-winner-backend-.*\", container!=\"\"}) by (pod), \"type\", \"Usage\", \"\", \"\")",
+                    "expr": "label_replace(\n  sum(\n    rate(container_cpu_usage_seconds_total{pod=~\"job-winner-backend-.*\", container!=\"\"}[5m])\n  ) by (pod),\n  \"type\", \"Usage\", \"\", \"\"\n)",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "{{type}}",
@@ -731,7 +659,7 @@ grafana:
                       "uid": "prometheus"
                     },
                     "editorMode": "code",
-                    "expr": "label_replace(sum(kube_pod_container_resource_requests{pod=~\"job-winner-backend-.*\", resource=\"memory\"}) by (pod), \"type\", \"Request\", \"\", \"\")",
+                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_requests{pod=~\"job-winner-backend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Request\", \"\", \"\"\n)",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "{{type}}",
@@ -744,7 +672,7 @@ grafana:
                       "uid": "prometheus"
                     },
                     "editorMode": "code",
-                    "expr": "label_replace(sum(kube_pod_container_resource_limits{pod=~\"job-winner-backend-.*\", resource=\"memory\"}) by (pod), \"type\", \"Limit\", \"\", \"\")",
+                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_limits{pod=~\"job-winner-backend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Limit\", \"\", \"\"\n)",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "{{type}}",
@@ -752,7 +680,7 @@ grafana:
                     "refId": "C"
                   }
                 ],
-                "title": "Backend Memory Usage vs. Request vs. Limit",
+                "title": "Backend CPU Usage vs. Request vs. Limit",
                 "type": "timeseries"
               },
               {
@@ -842,9 +770,9 @@ grafana:
                   "h": 8,
                   "w": 12,
                   "x": 0,
-                  "y": 16
+                  "y": 18
                 },
-                "id": 12,
+                "id": 6,
                 "options": {
                   "legend": {
                     "calcs": [],
@@ -867,11 +795,317 @@ grafana:
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "sum by (service_name) (\n  count_over_time({service_name=~\"job-winner-.*\"}[5m])\n)",
+                    "expr": "label_replace(\n  sum(\n    rate(container_cpu_usage_seconds_total{pod=~\"job-winner-frontend-.*\", container!=\"\"}[5m])\n  ) by (pod),\n  \"type\", \"Usage\", \"\", \"\"\n)",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "{{type}}",
                     "range": true,
+                    "refId": "A"
+                  },
+                  {
+                    "datasource": {
+                      "type": "prometheus",
+                      "uid": "prometheus"
+                    },
+                    "editorMode": "code",
+                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_requests{pod=~\"job-winner-frontend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Request\", \"\", \"\"\n)",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "B"
+                  },
+                  {
+                    "datasource": {
+                      "type": "prometheus",
+                      "uid": "prometheus"
+                    },
+                    "editorMode": "code",
+                    "expr": "label_replace(\n  sum(\n    kube_pod_container_resource_limits{pod=~\"job-winner-frontend-.*\", resource=\"cpu\"}\n  ) by (pod),\n  \"type\", \"Limit\", \"\", \"\"\n)",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "C"
+                  }
+                ],
+                "title": "Frontend CPU Usage vs. Request vs. Limit",
+                "type": "timeseries"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "prometheus"
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "barWidthFactor": 0.6,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineStyle": {
+                        "fill": "solid"
+                      },
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "showValues": false,
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "bytes"
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byFrameRefID",
+                        "options": "B"
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.lineStyle",
+                          "value": {
+                            "dash": [
+                              10,
+                              10
+                            ],
+                            "fill": "dash"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "gridPos": {
+                  "h": 8,
+                  "w": 12,
+                  "x": 12,
+                  "y": 18
+                },
+                "id": 11,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                  }
+                },
+                "pluginVersion": "12.3.0",
+                "targets": [
+                  {
+                    "datasource": {
+                      "type": "prometheus",
+                      "uid": "prometheus"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "label_replace(sum(container_memory_working_set_bytes{pod=~\"job-winner-backend-.*\", container!=\"\"}) by (pod), \"type\", \"Usage\", \"\", \"\")",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "A"
+                  },
+                  {
+                    "datasource": {
+                      "type": "prometheus",
+                      "uid": "prometheus"
+                    },
+                    "editorMode": "code",
+                    "expr": "label_replace(sum(kube_pod_container_resource_requests{pod=~\"job-winner-backend-.*\", resource=\"memory\"}) by (pod), \"type\", \"Request\", \"\", \"\")",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "B"
+                  },
+                  {
+                    "datasource": {
+                      "type": "prometheus",
+                      "uid": "prometheus"
+                    },
+                    "editorMode": "code",
+                    "expr": "label_replace(sum(kube_pod_container_resource_limits{pod=~\"job-winner-backend-.*\", resource=\"memory\"}) by (pod), \"type\", \"Limit\", \"\", \"\")",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{type}}",
+                    "range": true,
+                    "refId": "C"
+                  }
+                ],
+                "title": "Backend Memory Usage vs. Request vs. Limit",
+                "type": "timeseries"
+              },
+              {
+                "collapsed": false,
+                "gridPos": {
+                  "h": 1,
+                  "w": 24,
+                  "x": 0,
+                  "y": 26
+                },
+                "id": 14,
+                "panels": [],
+                "title": "Log",
+                "type": "row"
+              },
+              {
+                "datasource": {
+                  "type": "loki",
+                  "uid": "loki"
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "barWidthFactor": 0.6,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "showValues": false,
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byFrameRefID",
+                        "options": "B"
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.lineStyle",
+                          "value": {
+                            "dash": [
+                              10,
+                              10
+                            ],
+                            "fill": "dash"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "gridPos": {
+                  "h": 8,
+                  "w": 12,
+                  "x": 0,
+                  "y": 27
+                },
+                "id": 12,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "right",
+                    "showLegend": false
+                  },
+                  "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                  }
+                },
+                "pluginVersion": "12.3.0",
+                "targets": [
+                  {
+                    "datasource": {
+                      "type": "loki",
+                      "uid": "loki"
+                    },
+                    "direction": "backward",
+                    "editorMode": "code",
+                    "expr": "sum by (service_name) (\n  count_over_time({service_name=~\"job-winner-.*\"}[5m])\n)",
+                    "queryType": "range",
                     "refId": "A"
                   }
                 ],
@@ -891,7 +1125,7 @@ grafana:
                   "h": 9,
                   "w": 24,
                   "x": 0,
-                  "y": 24
+                  "y": 35
                 },
                 "id": 1,
                 "options": {
@@ -936,7 +1170,7 @@ grafana:
                   "h": 10,
                   "w": 24,
                   "x": 0,
-                  "y": 33
+                  "y": 44
                 },
                 "id": 5,
                 "options": {
@@ -1020,12 +1254,12 @@ grafana:
               ]
             },
             "time": {
-              "from": "now-6h",
+              "from": "now-30m",
               "to": "now"
             },
             "timepicker": {},
             "timezone": "",
             "title": "Job Winner",
-            "uid": "jag9cwh",
-            "version": 16
+            "uid": "jahz5gt",
+            "version": 5
           }
