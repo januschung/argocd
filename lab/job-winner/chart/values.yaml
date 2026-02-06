@@ -16,11 +16,11 @@ frontend:
   persistence: {}
   resources:
     requests:
-      memory: '64Mi'
-      cpu: '100m'
+      memory: '32Mi'
+      cpu: '25m'
     limits:
-      memory: '64Mi'
-      cpu: '200m'
+      memory: '32Mi'
+      cpu: '50m'
 backend:
   image:
     repository: ghcr.io/januschung/job-winner
