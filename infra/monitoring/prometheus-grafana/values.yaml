@@ -104,6 +104,10 @@ grafana:
             oauthPassThru: false
           secureJsonData:
             httpHeaderValue1: default
+        - name: Infinity
+          type: yesoreyeram-infinity-datasource
+          access: proxy
+          isDefault: false
   # Dashboard provisioning for application log monitoring
   dashboardProviders:
     dashboardproviders.yaml:
