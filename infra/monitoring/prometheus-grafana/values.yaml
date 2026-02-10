@@ -23,12 +23,15 @@ prometheus:
 
 grafana:
   enabled: true
+  plugins:
+    - yesoreyeram-infinity-datasource
   # Disable automatic datasource creation since we define our own
   defaultDatasourceEnabled: false
 
   env:
     GF_SERVER_ROOT_URL: "https://janusc.duckdns.org/grafana"
     GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+    GF_INSTALL_PLUGINS: "yesoreyeram-infinity-datasource"
 
   extraSecretMounts:
     - name: grafana-github-oauth
