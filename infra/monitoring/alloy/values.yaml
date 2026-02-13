@@ -23,13 +23,40 @@ alloy:
         }
       }
 
-      prometheus.scrape "kubernetes" {
-        targets = discovery.kubernetes.pods.targets
-        forward_to = [prometheus.remote_write.prometheus.receiver]
-      }
-
       discovery.kubernetes "pods" {
         role = "pod"
+      }
+
+      prometheus.relabel "pods_scrape_filter" {
+        targets = discovery.kubernetes.pods.targets
+        // Only scrape pods that explicitly opt-in
+        rule {
+          source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
+          regex         = "true"
+          action        = "keep"
+        }
+
+        // Optional: support prometheus.io/path
+        rule {
+          source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
+          regex         = "(.+)"
+          target_label  = "__metrics_path__"
+          action        = "replace"
+        }
+
+        // Optional: support prometheus.io/port
+        rule {
+          source_labels = ["__address__", "__meta_kubernetes_pod_annotation_prometheus_io_port"]
+          regex         = "([^:]+)(?::\\d+)?;(\\d+)"
+          replacement   = "$1:$2"
+          target_label  = "__address__"
+          action        = "replace"
+        }
+      }
+
+      prometheus.scrape "kubernetes" {
+        targets    = prometheus.relabel.pods_scrape_filter.output
+        forward_to = [prometheus.remote_write.prometheus.receiver]
       }
 
       discovery.kubernetes "pods_logs" {
