@@ -28,7 +28,7 @@ alloy:
       }
 
       discovery.relabel "pods_scrape_filter" {
-        targets = discovery.relabel.pods_scrape_filter.output
+        targets = discovery.kubernetes.pods.targets
         // Only scrape pods that explicitly opt-in
         rule {
           source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
@@ -55,7 +55,7 @@ alloy:
       }
 
       prometheus.scrape "kubernetes" {
-        targets    = prometheus.relabel.pods_scrape_filter.output
+        targets    = discovery.relabel.pods_scrape_filter.output
         forward_to = [prometheus.remote_write.prometheus.receiver]
       }
 
