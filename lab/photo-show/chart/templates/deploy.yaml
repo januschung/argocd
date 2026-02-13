@@ -15,8 +15,6 @@ spec:
     metadata:
       labels:
         app: {{ include "app.name" . }}
-      annotations:
-        prometheus.io/scrape: "false"
     spec:
       {{- if .Values.persistence }}
       securityContext:
