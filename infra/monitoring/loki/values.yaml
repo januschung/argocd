@@ -81,6 +81,3 @@ loki:
 gateway:
   enabled: true
   verboseLogging: false
-  
-  annotations:
-    prometheus.io/scrape: "false"
