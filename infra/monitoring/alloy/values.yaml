@@ -27,7 +27,7 @@ alloy:
         role = "pod"
       }
 
-      prometheus.relabel "pods_scrape_filter" {
+      discovery.relabel "pods_scrape_filter" {
         targets = discovery.kubernetes.pods.targets
         // Only scrape pods that explicitly opt-in
         rule {
