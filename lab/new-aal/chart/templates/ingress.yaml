@@ -13,13 +13,6 @@ spec:
     - host: {{ .Values.ingress.hostname }}
       http:
         paths:
-          - path: {{ .Values.ingress.backendPath }}
-            pathType: {{ .Values.ingress.backendPathType }}
-            backend:
-              service:
-                name: {{ include "app.name" . }}-backend
-                port:
-                  number: {{ .Values.ingress.backendServicePort }}
           - path: {{ .Values.ingress.path }}
             pathType: {{ .Values.ingress.pathType }}
             backend:
