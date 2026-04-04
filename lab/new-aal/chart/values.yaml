@@ -2,7 +2,7 @@ replicaCount: 1
 frontend:
   image:
     repository: ghcr.io/januschung/aal-3
-    tag: 1c494c4
+    tag: cec10a3
   imagePullSecrets:
     - name: ghcr-token
   revisionHistoryLimit: 5
