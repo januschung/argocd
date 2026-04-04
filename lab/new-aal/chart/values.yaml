@@ -25,11 +25,10 @@ frontend:
 ingress:
   enabled: true
   ingressClassName: traefik
-  hostname: janusc.duckdns.org
-  path: /aal
+  hostname: ableaccess.duckdns.org
+  path: /
   pathType: Prefix
   servicePort: 80
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls.certresolver: le
-    traefik.ingress.kubernetes.io/router.middlewares: new-aal-new-aal-stripprefix@kubernetescrd
