@@ -1,0 +1,34 @@
+replicaCount: 1
+frontend:
+  image:
+    repository: ghcr.io/januschung/aal-3
+    tag: 1c494c4
+  imagePullSecrets:
+    - name: ghcr-token
+  revisionHistoryLimit: 5
+  service:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 80
+        targetPort: 80
+  secret: {}
+  configMap: {}
+  persistence: {}
+  resources:
+    requests:
+      memory: '256Mi'
+      cpu: '100m'
+    limits:
+      memory: '256Mi'
+      cpu: '300m'
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  hostname: janusc.duckdns.org
+  path: /aal
+  pathType: Prefix
+  servicePort: 80
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls.certresolver: le
